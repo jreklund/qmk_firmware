@@ -43,6 +43,13 @@ enum layer_number {
 #define MTC_O LGUI_T(KC_O)
 #define MTC_DOT ALGR_T(KC_DOT)
 
+// Mod-Tap - Num
+#define MTN_PSLS LSFT_T(KC_PSLS)
+#define MTN_PAST LCTL_T(KC_PAST)
+#define MTN_PMNS LALT_T(KC_PMNS)
+#define MTN_PPLS LGUI_T(KC_PPLS)
+#define MTN_DOT ALGR_T(KC_DOT)
+
 // Layers
 #define L_QWE DF(_QWERTY)
 #define L_COL DF(_COLEMAK)
@@ -207,20 +214,20 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |      |   [  |   7  |   8  |   9  |  ]   |                    |      |      |      |      |      |      |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
  * |      |   ;  |   4  |   5  |   6  |  =   |-------.    .-------|      |   /  |   *  |   -  |   +  |      |
- * |------+------+------+------+------+------|       |    |       |------+------+------+------+------+------|
+ * |------+------+------+------+------+------|       |    |       |------+-LSFT-+-LCTL-+-LALT-+-LGUI-+------|
  * |      |   `  |   1  |   2  |   3  |  \   |-------|    |-------|      |      |   ,  |   .  |      |      |
- * '-----------------------------------------/       /    \       \-----------------------------------------'
+ * '-----------------------------------------/       /    \       \----------------------RALT---------------'
  *                   |      |   .  |  0   | /   -   /      \       \  |      |      |      |
  *                   |      |      |      |/       /        \       \ |      |      |      |
  *                   '-------------------''-------'          '-------''--------------------'
  */
 
 [_NUM] = LAYOUT(
-  KC_NO,  KC_NO,    KC_NO,  KC_NO,  KC_NO,   KC_NO,                        KC_NO,  KC_NO,    KC_NO,    KC_NO,    KC_NO,    KC_NO,
-  KC_NO,  KC_LBRC,  KC_7,   KC_8,   KC_9,    KC_RBRC,                      KC_NO,  KC_NO,    KC_NO,    KC_NO,    KC_NO,    KC_NO,
-  KC_NO,  KC_SCLN,  KC_4,   KC_5,   KC_6,    KC_EQL,                       KC_NO,  KC_PSLS,  KC_PAST,  KC_PMNS,  KC_PPLS,  KC_NO,
-  KC_NO,  KC_GRV,   KC_1,   KC_2,   KC_3,    KC_BSLS,  KC_NO,      KC_NO,  KC_NO,  KC_NO,    KC_COMM,  KC_DOT,   KC_NO,    KC_NO,
-                            KC_NO,  KC_DOT,  KC_0,     KC_MINS,    KC_NO,  KC_NO,  KC_NO,    KC_NO
+  KC_NO,  KC_NO,    KC_NO,  KC_NO,  KC_NO,   KC_NO,                        KC_NO,  KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,
+  KC_NO,  KC_LBRC,  KC_7,   KC_8,   KC_9,    KC_RBRC,                      KC_NO,  KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,
+  KC_NO,  KC_SCLN,  KC_4,   KC_5,   KC_6,    KC_EQL,                       KC_NO,  MTN_PSLS,  MTN_PAST,  MTN_PMNS,  MTN_PPLS,  KC_NO,
+  KC_NO,  KC_GRV,   KC_1,   KC_2,   KC_3,    KC_BSLS,  KC_NO,      KC_NO,  KC_NO,  KC_NO,     KC_COMM,   MTN_DOT,   KC_NO,     KC_NO,
+                            KC_NO,  KC_DOT,  KC_0,     KC_MINS,    KC_NO,  KC_NO,  KC_NO,     KC_NO
 ),
 
 /* FUN
