@@ -9,12 +9,26 @@
 enum layer_number {
   _QWERTY,
   _COLEMAK = 0,
-  _MISC,
+  _CODE,
   _NAV,
   _MOUSE,
   _SYM,
   _NUM,
   _FUN,
+};
+
+// Tap Dance
+enum {
+  KC_RABK_LABK, // ><
+  KC_LBRC_RBRC, // []
+  KC_LPRN_RPRN, // ()
+  KC_LCBR_RCBR, // {}
+  KC_QUOT_DQUO, // '"
+  KC_MINS_UNDS, // -_
+  KC_SLSH_BSLS, // /\ 
+  KC_GRV_TILD, // `~
+  KC_SCLN_COLN, // ;:
+  KC_DLR_DOCB, // $DOCB
 };
 
 // Mod-Tap - Qwerty
@@ -54,13 +68,25 @@ enum layer_number {
 #define L_QWE DF(_QWERTY)
 #define L_COL DF(_COLEMAK)
 
-#define L_MIS LT(_MISC, KC_ESC)
+#define L_COD LT(_CODE, KC_ESC)
 #define L_NAV LT(_NAV, KC_SPC)
 #define L_MUS LT(_MOUSE, KC_TAB)
 
 #define L_SYM LT(_SYM, KC_ENT)
 #define L_NUM LT(_NUM, KC_BSPC)
 #define L_FUN LT(_FUN, KC_DEL)
+
+// Tap Dance
+#define TD_ABK TD(KC_RABK_LABK)
+#define TD_BRC TD(KC_LBRC_RBRC)
+#define TD_PRN TD(KC_LPRN_RPRN)
+#define TD_CBR TD(KC_LCBR_RCBR)
+#define TD_QUO TD(KC_QUOT_DQUO)
+#define TD_DSH TD(KC_MINS_UNDS)
+#define TD_SLS TD(KC_SLSH_BSLS)
+#define TD_GRV TD(KC_GRV_TILD)
+#define TD_CLN TD(KC_SCLN_COLN)
+#define TD_DLR TD(KC_DLR_DOCB)
 
 // Swedish
 #define RALT_W RALT(KC_W)
@@ -89,7 +115,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_NO,    KC_Q,   KC_W,   KC_E,   KC_R,   KC_T,                     KC_Y,   KC_U,   KC_I,     KC_O,     KC_P,      RALT_W,
   KC_LSFT,  MTQ_A,  MTQ_S,  MTQ_D,  MTQ_F,  KC_G,                     KC_H,   MTQ_J,  MTQ_K,    MTQ_L,    MTQ_QUOT,  RALT_A,
   KC_LCTL,  KC_Z,   MTQ_X,  KC_C,   KC_V,   KC_B,   KC_NO,    KC_NO,  KC_N,   KC_M,   KC_COMM,  MTQ_DOT,  KC_SLSH,   RALT_O,
-                            KC_NO,  L_MIS,  L_NAV,  L_MUS,    L_SYM,  L_NUM,  L_FUN,  KC_NO
+                            KC_NO,  L_COD,  L_NAV,  L_MUS,    L_SYM,  L_NUM,  L_FUN,  KC_NO
 ),
 
 /* COLEMAK-DH
@@ -112,30 +138,30 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_NO,    KC_Q,   KC_W,   KC_F,   KC_P,   KC_B,                     KC_J,   KC_L,   KC_U,     KC_Y,     KC_QUOT,  RALT_W,
   KC_LSFT,  MTC_A,  MTC_R,  MTC_S,  MTC_T,  KC_G,                     KC_M,   MTC_N,  MTC_E,    MTC_I,    MTC_O,    RALT_A,
   KC_LCTL,  KC_Z,   MTC_X,  KC_C,   KC_D,   KC_V,   KC_NO,    KC_NO,  KC_K,   KC_H,   KC_COMM,  MTC_DOT,  KC_SLSH,  RALT_O,
-                            KC_NO,  L_MIS,  L_NAV,  L_MUS,    L_SYM,  L_NUM,  L_FUN,  KC_NO
+                            KC_NO,  L_COD,  L_NAV,  L_MUS,    L_SYM,  L_NUM,  L_FUN,  KC_NO
 ),
 
-/* MISC
+/* CODE
  * .-----------------------------------------.                    .-----------------------------------------.
  * |      |      |      |      |      |      |                    |      |      |      |      |      |      |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * |      |      |      |      |      |      |                    |      |      |      |      |      |      |
+ * |      |      |      |      |      |      |                    |      |   &  |   |  |   !  |   #  |      |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * |      |      |      |      |      |      |-------.    .-------|      |      |      |      |      |      |
- * |------+------+------+------+------+------|       |    |       |------+------+------+------+------+------|
- * |      |      |      |      |      |      |-------|    |-------|      |      |      |      |      |      |
- * '-----------------------------------------/       /    \       \-----------------------------------------'
- *                   |      |      |      | /       /      \       \  |      |      |      |
+ * |      |   *  |   @  |   >  |   %  |   ^  |-------.    .-------|   [  |   (  |   {  |   '  |   -  |      |
+ * |------+------+------+---<--+------+------|       |    |       |---]--+---)--+---}--+---"--+---_--+------|
+ * |      |      |      |      |      |      |-------|    |-------|      |   =  |   +  |   .  |   /  |      |
+ * '-----------------------------------------/       /    \       \-------------------------------\---------'
+ *                   |      |      |      | /       /      \   `   \  |   ;  |   $  |      |
  *                   |      |      |      |/       /        \       \ |      |      |      |
- *                   '-------------------''-------'          '-------''--------------------'
+ *                   '-------------------''-------'          '---~---''---:----DOCB--------'
  */
 
-[_MISC] = LAYOUT(
-  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,                    KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,
-  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,                    KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,
-  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,                    KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,
-  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,    KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,  KC_NO,
-                          KC_NO,  KC_NO,  KC_NO,  KC_NO,    KC_NO,  KC_NO,  KC_NO,  KC_NO
+[_CODE] = LAYOUT(
+  KC_NO,  KC_NO,    KC_NO,  KC_NO,   KC_NO,    KC_NO,                       KC_NO,   KC_NO,    KC_NO,    KC_NO,    KC_NO,    KC_NO,
+  KC_NO,  KC_NO,    KC_NO,  KC_NO,   KC_NO,    KC_NO,                       KC_NO,   KC_AMPR,  KC_PIPE,  KC_EXLM,  KC_HASH,  KC_NO,
+  KC_NO,  KC_ASTR,  KC_AT,  TD_ABK,  KC_PERC,  KC_CIRC,                     TD_BRC,  TD_PRN,   TD_CBR,   TD_QUO,   TD_DSH,   KC_NO,
+  KC_NO,  KC_NO,    KC_NO,  KC_NO,   KC_NO,    KC_NO,    KC_NO,    KC_NO,   KC_NO,   KC_EQL,   KC_PLUS,  KC_DOT,   TD_SLS,   KC_NO,
+                            KC_NO,   KC_NO,    KC_NO,    KC_NO,    TD_GRV,  TD_CLN,  TD_DLR,   KC_NO
 ),
 
 /* NAV
@@ -253,4 +279,30 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                            KC_NO,  KC_APP,  KC_SPC,   KC_TAB,    KC_NO,  KC_NO,  KC_NO,    KC_NO
 )
 
+};
+
+void td_dlr_docb(qk_tap_dance_state_t *state, void *user_data) {
+  switch (state->count) {
+    case 1:
+      SEND_STRING("$");
+      reset_tap_dance(state);
+      break;
+    case 2:
+      SEND_STRING_DELAY("/**\n", 50);
+      reset_tap_dance(state);
+      break;
+  }
+}
+
+qk_tap_dance_action_t tap_dance_actions[] = {
+  [KC_RABK_LABK] = ACTION_TAP_DANCE_DOUBLE(KC_RABK, KC_LABK),
+  [KC_LBRC_RBRC] = ACTION_TAP_DANCE_DOUBLE(KC_LBRC, KC_RBRC),
+  [KC_LPRN_RPRN] = ACTION_TAP_DANCE_DOUBLE(KC_LPRN, KC_RPRN),
+  [KC_LCBR_RCBR] = ACTION_TAP_DANCE_DOUBLE(KC_LCBR, KC_RCBR),
+  [KC_QUOT_DQUO] = ACTION_TAP_DANCE_DOUBLE(KC_QUOT, KC_DQUO),
+  [KC_MINS_UNDS] = ACTION_TAP_DANCE_DOUBLE(KC_MINS, KC_UNDS),
+  [KC_SLSH_BSLS] = ACTION_TAP_DANCE_DOUBLE(KC_SLSH, KC_BSLS),
+  [KC_GRV_TILD] = ACTION_TAP_DANCE_DOUBLE(KC_GRV, KC_TILD),
+  [KC_SCLN_COLN] = ACTION_TAP_DANCE_DOUBLE(KC_SCLN, KC_COLN),
+  [KC_DLR_DOCB] = ACTION_TAP_DANCE_FN(td_dlr_docb),
 };
