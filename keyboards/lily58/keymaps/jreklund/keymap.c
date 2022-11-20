@@ -7,8 +7,8 @@
 #include <stdio.h>
 
 enum layer_number {
-  _QWERTY = 0,
-  _COLEMAK,
+  _QWERTY,
+  _COLEMAK = 0,
   _MISC,
   _NAV,
   _MOUSE,
