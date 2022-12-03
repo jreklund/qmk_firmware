@@ -28,7 +28,15 @@ enum {
   KC_SLSH_BSLS, // /\ 
   KC_GRV_TILD, // `~
   KC_SCLN_COLN, // ;:
-  KC_DLR_DOCB, // $DOCB
+  KC_DLR_PLUS, // $+
+  KC_COMM_HASH, // ,#
+  KC_DOT_PERC, // .%
+  KC_PHP, // <?php?>
+};
+
+// Macros
+enum custom_keycodes {
+  KC_DOCB = SAFE_RANGE,
 };
 
 // Mod-Tap - Qwerty
@@ -56,6 +64,10 @@ enum {
 #define MTC_I LALT_T(KC_I)
 #define MTC_O LGUI_T(KC_O)
 #define MTC_DOT ALGR_T(KC_DOT)
+
+// Modifiers - Code
+#define MOD_F LSA(KC_F)
+#define MOD_GRV RCS(KC_GRV)
 
 // Mod-Tap - Num
 #define MTN_PSLS LSFT_T(KC_PSLS)
@@ -86,7 +98,10 @@ enum {
 #define TD_SLS TD(KC_SLSH_BSLS)
 #define TD_GRV TD(KC_GRV_TILD)
 #define TD_CLN TD(KC_SCLN_COLN)
-#define TD_DLR TD(KC_DLR_DOCB)
+#define TD_DLR TD(KC_DLR_PLUS)
+#define TD_COM TD(KC_COMM_HASH)
+#define TD_DOT TD(KC_DOT_PERC)
+#define TD_PHP TD(KC_PHP)
 
 // Swedish
 #define RALT_W RALT(KC_W)
@@ -145,23 +160,23 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * .-----------------------------------------.                    .-----------------------------------------.
  * |      |      |      |      |      |      |                    |      |      |      |      |      |      |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * |      |      |      |      |      |      |                    |      |   &  |   |  |   !  |   #  |      |
- * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * |      |   *  |   @  |   >  |   %  |   ^  |-------.    .-------|   [  |   (  |   {  |   '  |   -  |      |
- * |------+------+------+---<--+------+------|       |    |       |---]--+---)--+---}--+---"--+---_--+------|
- * |      |      |      |      |      |      |-------|    |-------|      |   =  |   +  |   .  |   /  |      |
- * '-----------------------------------------/       /    \       \-------------------------------\---------'
- *                   |      |      |      | /       /      \   `   \  |   ;  |   $  |      |
+ * |      |      | TERM | PHP  | FIX  |      |                    |      |   &  |   |  |   !  |   '  |      |
+ * |------+------+------+------+------+------|                    |------+------+------+------+---"--+------|
+ * |      |   *  |   @  |   >  |   =  |   ^  |-------.    .-------|   [  |   (  |   ;  |   $  |   -  |      |
+ * |------+------+------+---<--+------+------|       |    |       |---]--+---)--+---:--+---+--+---_--+------|
+ * |      |   `  |      |      | DOCB |      |-------|    |-------|      |   {  |   ,  |   .  |   /  |      |
+ * '----------~------------------------------/       /    \       \----------}------#------%------\---------'
+ *                   |      |      |      | /       /      \  ENT  \  | BSPC | SPC  |      |
  *                   |      |      |      |/       /        \       \ |      |      |      |
- *                   '-------------------''-------'          '---~---''---:----DOCB--------'
+ *                   '-------------------''-------'          '-------''--------------------'
  */
 
 [_CODE] = LAYOUT(
-  KC_NO,  KC_NO,    KC_NO,  KC_NO,   KC_NO,    KC_NO,                       KC_NO,   KC_NO,    KC_NO,    KC_NO,    KC_NO,    KC_NO,
-  KC_NO,  KC_NO,    KC_NO,  KC_NO,   KC_NO,    KC_NO,                       KC_NO,   KC_AMPR,  KC_PIPE,  KC_EXLM,  KC_HASH,  KC_NO,
-  KC_NO,  KC_ASTR,  KC_AT,  TD_ABK,  KC_PERC,  KC_CIRC,                     TD_BRC,  TD_PRN,   TD_CBR,   TD_QUO,   TD_DSH,   KC_NO,
-  KC_NO,  KC_NO,    KC_NO,  KC_NO,   KC_NO,    KC_NO,    KC_NO,    KC_NO,   KC_NO,   KC_EQL,   KC_PLUS,  KC_DOT,   TD_SLS,   KC_NO,
-                            KC_NO,   KC_NO,    KC_NO,    KC_NO,    TD_GRV,  TD_CLN,  TD_DLR,   KC_NO
+  KC_NO,  KC_NO,    KC_NO,    KC_NO,   KC_NO,    KC_NO,                       KC_NO,    KC_NO,    KC_NO,    KC_NO,    KC_NO,   KC_NO,
+  KC_NO,  KC_NO,    MOD_GRV,  TD_PHP,  MOD_F,    KC_NO,                       KC_NO,    KC_AMPR,  KC_PIPE,  KC_EXLM,  TD_QUO,  KC_NO,
+  KC_NO,  KC_ASTR,  KC_AT,    TD_ABK,  KC_EQL,   KC_CIRC,                     TD_BRC,   TD_PRN,   TD_CLN,   TD_DLR,   TD_DSH,  KC_NO,
+  KC_NO,  TD_GRV,   KC_NO,    KC_NO,   KC_DOCB,  KC_NO,    KC_NO,    KC_NO,   KC_NO,    TD_CBR,   TD_COM,   TD_DOT,   TD_SLS,  KC_NO,
+                              KC_NO,   KC_NO,    KC_NO,    KC_NO,    KC_ENT,  KC_BSPC,  KC_SPC,   KC_NO
 ),
 
 /* NAV
@@ -281,14 +296,26 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 };
 
-void td_dlr_docb(qk_tap_dance_state_t *state, void *user_data) {
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+  switch (keycode) {
+    case KC_DOCB:
+      if (record->event.pressed) {
+        SEND_STRING_DELAY("/**\n", 50);
+      }
+      break;
+  }
+
+  return true;
+};
+
+void td_php(qk_tap_dance_state_t *state, void *user_data) {
   switch (state->count) {
     case 1:
-      SEND_STRING("$");
+      SEND_STRING("<?php");
       reset_tap_dance(state);
       break;
     case 2:
-      SEND_STRING_DELAY("/**\n", 50);
+      SEND_STRING("?>");
       reset_tap_dance(state);
       break;
   }
@@ -304,5 +331,8 @@ qk_tap_dance_action_t tap_dance_actions[] = {
   [KC_SLSH_BSLS] = ACTION_TAP_DANCE_DOUBLE(KC_SLSH, KC_BSLS),
   [KC_GRV_TILD] = ACTION_TAP_DANCE_DOUBLE(KC_GRV, KC_TILD),
   [KC_SCLN_COLN] = ACTION_TAP_DANCE_DOUBLE(KC_SCLN, KC_COLN),
-  [KC_DLR_DOCB] = ACTION_TAP_DANCE_FN(td_dlr_docb),
+  [KC_DLR_PLUS] = ACTION_TAP_DANCE_DOUBLE(KC_DLR, KC_PLUS),
+  [KC_COMM_HASH] = ACTION_TAP_DANCE_DOUBLE(KC_COMM, KC_HASH),
+  [KC_DOT_PERC] = ACTION_TAP_DANCE_DOUBLE(KC_DOT, KC_PERC),
+  [KC_PHP] = ACTION_TAP_DANCE_FN(td_php),
 };
