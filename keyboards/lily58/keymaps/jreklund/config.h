@@ -32,3 +32,6 @@
 #define MOUSEKEY_MAX_SPEED      6
 #undef MOUSEKEY_TIME_TO_MAX
 #define MOUSEKEY_TIME_TO_MAX    64
+
+// Activate Caps Word by pressing Left Shift + Right Shift
+#define BOTH_SHIFTS_TURNS_ON_CAPS_WORD
