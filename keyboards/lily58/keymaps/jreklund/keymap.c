@@ -7,7 +7,7 @@
 #include <stdio.h>
 
 enum layer_number {
-  _QWERTY,
+  _GAME,
   _COLEMAK = 0,
   _CODE,
   _NAV,
@@ -39,19 +39,6 @@ enum custom_keycodes {
   KC_DOCB = SAFE_RANGE,
 };
 
-// Mod-Tap - Qwerty
-#define MTQ_A LGUI_T(KC_A)
-#define MTQ_S LALT_T(KC_S)
-#define MTQ_D LCTL_T(KC_D)
-#define MTQ_F LSFT_T(KC_F)
-#define MTQ_X ALGR_T(KC_X)
-
-#define MTQ_J RSFT_T(KC_J)
-#define MTQ_K RCTL_T(KC_K)
-#define MTQ_L ALT_T(KC_L)
-#define MTQ_QUOT LGUI_T(KC_QUOT)
-#define MTQ_DOT ALGR_T(KC_DOT)
-
 // Mod-Tap - Colemak-DH
 #define MTC_A LGUI_T(KC_A)
 #define MTC_R LALT_T(KC_R)
@@ -77,7 +64,7 @@ enum custom_keycodes {
 #define MTN_DOT ALGR_T(KC_DOT)
 
 // Layers
-#define L_QWE DF(_QWERTY)
+#define L_GAME DF(_GAME)
 #define L_COL DF(_COLEMAK)
 
 #define L_COD LT(_CODE, KC_ESC)
@@ -110,32 +97,32 @@ enum custom_keycodes {
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
-/* QWERTY
+/* GAME
  * .-----------------------------------------.                    .-----------------------------------------.
  * |L_COL |   1  |   2  |   3  |   4  |   5  |                    |   6  |   7  |   8  |   9  |   0  |      |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * |      |   Q  |   W  |   E  |   R  |   T  |                    |   Y  |   U  |   I  |   O  |   P  |   Å  |
+ * |      |   Q  |   W  |   F  |   P  |   B  |                    |   J  |   L  |   U  |   Y  |   '  |   Å  |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * | LSFT |   A  |   S  |   D  |   F  |   G  |-------.    .-------|   H  |   J  |   K  |   L  |   '  |   Ä  |
- * |------+-LGUI-+-LALT-+-LCTL-+-LSFT-+------|       |    |       |------+-RSFT-+-RCTL-+-LALT-+-RGUI-+------|
- * | LCTL |   Z  |   X  |   C  |   V  |   B  |-------|    |-------|   N  |   M  |   ,  |   .  |   /  |   Ö  |
+ * | LSFT |   A  |   R  |   S  |   T  |   G  |-------.    .-------|   M  |   N  |   E  |   I  |   O  |   Ä  |
+ * |------+------+------+------+------+------| LCTL  |    |  RCTL |------+------+------+------+------+------|
+ * | LCTL |   Z  |   X  |   C  |   D  |   V  |-------|    |-------|   K  |   H  |   ,  |   .  |   /  |   Ö  |
  * '---------------RALT----------------------/       /    \       \----------------------RALT---------------'
  *                   |      | ESC  | SPC  | /  TAB  /      \  ENT  \  | BSPC | DEL  |      |
  *                   |      |      |      |/       /        \       \ |      |      |      |
  *                   '---------MIS---NAV-''--MUS--'          '--SYM--''-NUM----FUN---------'
  */
 
-[_QWERTY] = LAYOUT(
-  L_COL,    KC_1,   KC_2,   KC_3,   KC_4,   KC_5,                     KC_6,   KC_7,   KC_8,     KC_9,     KC_0,      KC_NO,
-  KC_NO,    KC_Q,   KC_W,   KC_E,   KC_R,   KC_T,                     KC_Y,   KC_U,   KC_I,     KC_O,     KC_P,      RALT_W,
-  KC_LSFT,  MTQ_A,  MTQ_S,  MTQ_D,  MTQ_F,  KC_G,                     KC_H,   MTQ_J,  MTQ_K,    MTQ_L,    MTQ_QUOT,  RALT_A,
-  KC_LCTL,  KC_Z,   MTQ_X,  KC_C,   KC_V,   KC_B,   KC_NO,    KC_NO,  KC_N,   KC_M,   KC_COMM,  MTQ_DOT,  KC_SLSH,   RALT_O,
-                            KC_NO,  L_COD,  L_NAV,  L_MUS,    L_SYM,  L_NUM,  L_FUN,  KC_NO
+[_GAME] = LAYOUT(
+  L_COL,    KC_1,  KC_2,   KC_3,   KC_4,   KC_5,                       KC_6,   KC_7,   KC_8,     KC_9,     KC_0,     KC_NO,
+  KC_NO,    KC_Q,  KC_W,   KC_F,   KC_P,   KC_B,                       KC_J,   KC_L,   KC_U,     KC_Y,     KC_QUOT,  RALT_W,
+  KC_LSFT,  KC_A,  KC_R,   KC_S,   KC_T,   KC_G,                       KC_M,   KC_N,   KC_E,     KC_I,     KC_O,     RALT_A,
+  KC_LCTL,  KC_Z,  MTC_X,  KC_C,   KC_D,   KC_V,   KC_LCTL,  KC_RCTL,  KC_K,   KC_H,   KC_COMM,  MTC_DOT,  KC_SLSH,  RALT_O,
+                           KC_NO,  L_COD,  L_NAV,  L_MUS,    L_SYM,    L_NUM,  L_FUN,  KC_NO
 ),
 
 /* COLEMAK-DH
  * .-----------------------------------------.                    .-----------------------------------------.
- * |L_QWE |   1  |   2  |   3  |   4  |   5  |                    |   6  |   7  |   8  |   9  |   0  |      |
+ * |L_GAME|   1  |   2  |   3  |   4  |   5  |                    |   6  |   7  |   8  |   9  |   0  |      |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
  * |      |   Q  |   W  |   F  |   P  |   B  |                    |   J  |   L  |   U  |   Y  |   '  |   Å  |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
@@ -149,7 +136,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 
 [_COLEMAK] = LAYOUT(
-  L_QWE,    KC_1,   KC_2,   KC_3,   KC_4,   KC_5,                     KC_6,   KC_7,   KC_8,     KC_9,     KC_0,     KC_NO,
+  L_GAME,   KC_1,   KC_2,   KC_3,   KC_4,   KC_5,                     KC_6,   KC_7,   KC_8,     KC_9,     KC_0,     KC_NO,
   KC_NO,    KC_Q,   KC_W,   KC_F,   KC_P,   KC_B,                     KC_J,   KC_L,   KC_U,     KC_Y,     KC_QUOT,  RALT_W,
   KC_LSFT,  MTC_A,  MTC_R,  MTC_S,  MTC_T,  KC_G,                     KC_M,   MTC_N,  MTC_E,    MTC_I,    MTC_O,    RALT_A,
   KC_LCTL,  KC_Z,   MTC_X,  KC_C,   KC_D,   KC_V,   KC_NO,    KC_NO,  KC_K,   KC_H,   KC_COMM,  MTC_DOT,  KC_SLSH,  RALT_O,
