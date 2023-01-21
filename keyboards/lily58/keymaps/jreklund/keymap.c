@@ -7,8 +7,8 @@
 #include <stdio.h>
 
 enum layer_number {
-  _GAME,
   _COLEMAK = 0,
+  _GAME,
   _CODE,
   _NAV,
   _MOUSE,
@@ -64,8 +64,8 @@ enum custom_keycodes {
 #define MTN_DOT ALGR_T(KC_DOT)
 
 // Layers
-#define L_GAME DF(_GAME)
 #define L_COL DF(_COLEMAK)
+#define L_GAME DF(_GAME)
 
 #define L_COD LT(_CODE, KC_ESC)
 #define L_NAV LT(_NAV, KC_SPC)
@@ -97,29 +97,6 @@ enum custom_keycodes {
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
-/* GAME
- * .-----------------------------------------.                    .-----------------------------------------.
- * |L_COL |   1  |   2  |   3  |   4  |   5  |                    |   6  |   7  |   8  |   9  |   0  |      |
- * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * |      |   Q  |   W  |   F  |   P  |   B  |                    |   J  |   L  |   U  |   Y  |   '  |   Å  |
- * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * | LSFT |   A  |   R  |   S  |   T  |   G  |-------.    .-------|   M  |   N  |   E  |   I  |   O  |   Ä  |
- * |------+------+------+------+------+------| LCTL  |    |  RCTL |------+------+------+------+------+------|
- * | LCTL |   Z  |   X  |   C  |   D  |   V  |-------|    |-------|   K  |   H  |   ,  |   .  |   /  |   Ö  |
- * '---------------RALT----------------------/       /    \       \----------------------RALT---------------'
- *                   |      | ESC  | SPC  | /  TAB  /      \  ENT  \  | BSPC | DEL  |      |
- *                   |      |      |      |/       /        \       \ |      |      |      |
- *                   '---------MIS---NAV-''--MUS--'          '--SYM--''-NUM----FUN---------'
- */
-
-[_GAME] = LAYOUT(
-  L_COL,    KC_1,  KC_2,   KC_3,   KC_4,   KC_5,                       KC_6,   KC_7,   KC_8,     KC_9,     KC_0,     KC_NO,
-  KC_NO,    KC_Q,  KC_W,   KC_F,   KC_P,   KC_B,                       KC_J,   KC_L,   KC_U,     KC_Y,     KC_QUOT,  RALT_W,
-  KC_LSFT,  KC_A,  KC_R,   KC_S,   KC_T,   KC_G,                       KC_M,   KC_N,   KC_E,     KC_I,     KC_O,     RALT_A,
-  KC_LCTL,  KC_Z,  MTC_X,  KC_C,   KC_D,   KC_V,   KC_LCTL,  KC_RCTL,  KC_K,   KC_H,   KC_COMM,  MTC_DOT,  KC_SLSH,  RALT_O,
-                           KC_NO,  L_COD,  L_NAV,  L_MUS,    L_SYM,    L_NUM,  L_FUN,  KC_NO
-),
-
 /* COLEMAK-DH
  * .-----------------------------------------.                    .-----------------------------------------.
  * |L_GAME|   1  |   2  |   3  |   4  |   5  |                    |   6  |   7  |   8  |   9  |   0  |      |
@@ -141,6 +118,29 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_LSFT,  MTC_A,  MTC_R,  MTC_S,  MTC_T,  KC_G,                     KC_M,   MTC_N,  MTC_E,    MTC_I,    MTC_O,    RALT_A,
   KC_LCTL,  KC_Z,   MTC_X,  KC_C,   KC_D,   KC_V,   KC_NO,    KC_NO,  KC_K,   KC_H,   KC_COMM,  MTC_DOT,  KC_SLSH,  RALT_O,
                             KC_NO,  L_COD,  L_NAV,  L_MUS,    L_SYM,  L_NUM,  L_FUN,  KC_NO
+),
+
+/* GAME
+ * .-----------------------------------------.                    .-----------------------------------------.
+ * |L_COL |   1  |   2  |   3  |   4  |   5  |                    |   6  |   7  |   8  |   9  |   0  |      |
+ * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
+ * |      |   Q  |   W  |   F  |   P  |   B  |                    |   J  |   L  |   U  |   Y  |   '  |   Å  |
+ * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
+ * | LSFT |   A  |   R  |   S  |   T  |   G  |-------.    .-------|   M  |   N  |   E  |   I  |   O  |   Ä  |
+ * |------+------+------+------+------+------| LCTL  |    |  RCTL |------+------+------+------+------+------|
+ * | LCTL |   Z  |   X  |   C  |   D  |   V  |-------|    |-------|   K  |   H  |   ,  |   .  |   /  |   Ö  |
+ * '---------------RALT----------------------/       /    \       \----------------------RALT---------------'
+ *                   |      | ESC  | SPC  | /  TAB  /      \  ENT  \  | BSPC | DEL  |      |
+ *                   |      |      |      |/       /        \       \ |      |      |      |
+ *                   '---------MIS---NAV-''--MUS--'          '--SYM--''-NUM----FUN---------'
+ */
+
+[_GAME] = LAYOUT(
+  L_COL,    KC_1,  KC_2,   KC_3,   KC_4,   KC_5,                       KC_6,   KC_7,   KC_8,     KC_9,     KC_0,     KC_NO,
+  KC_NO,    KC_Q,  KC_W,   KC_F,   KC_P,   KC_B,                       KC_J,   KC_L,   KC_U,     KC_Y,     KC_QUOT,  RALT_W,
+  KC_LSFT,  KC_A,  KC_R,   KC_S,   KC_T,   KC_G,                       KC_M,   KC_N,   KC_E,     KC_I,     KC_O,     RALT_A,
+  KC_LCTL,  KC_Z,  MTC_X,  KC_C,   KC_D,   KC_V,   KC_LCTL,  KC_RCTL,  KC_K,   KC_H,   KC_COMM,  MTC_DOT,  KC_SLSH,  RALT_O,
+                           KC_NO,  L_COD,  L_NAV,  L_MUS,    L_SYM,    L_NUM,  L_FUN,  KC_NO
 ),
 
 /* CODE
