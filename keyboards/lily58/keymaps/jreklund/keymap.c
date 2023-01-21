@@ -46,8 +46,8 @@ enum custom_keycodes {
 #define MTQ_F LSFT_T(KC_F)
 #define MTQ_X ALGR_T(KC_X)
 
-#define MTQ_J LSFT_T(KC_J)
-#define MTQ_K LCTL_T(KC_K)
+#define MTQ_J RSFT_T(KC_J)
+#define MTQ_K RCTL_T(KC_K)
 #define MTQ_L ALT_T(KC_L)
 #define MTQ_QUOT LGUI_T(KC_QUOT)
 #define MTQ_DOT ALGR_T(KC_DOT)
@@ -59,10 +59,10 @@ enum custom_keycodes {
 #define MTC_T LSFT_T(KC_T)
 #define MTC_X ALGR_T(KC_X)
 
-#define MTC_N LSFT_T(KC_N)
-#define MTC_E LCTL_T(KC_E)
-#define MTC_I LALT_T(KC_I)
-#define MTC_O LGUI_T(KC_O)
+#define MTC_N RSFT_T(KC_N)
+#define MTC_E RCTL_T(KC_E)
+#define MTC_I ALT_T(KC_I)
+#define MTC_O RGUI_T(KC_O)
 #define MTC_DOT ALGR_T(KC_DOT)
 
 // Modifiers - Code
@@ -117,7 +117,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |      |   Q  |   W  |   E  |   R  |   T  |                    |   Y  |   U  |   I  |   O  |   P  |   Å  |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
  * | LSFT |   A  |   S  |   D  |   F  |   G  |-------.    .-------|   H  |   J  |   K  |   L  |   '  |   Ä  |
- * |------+-LGUI-+-LALT-+-LCTL-+-LSFT-+------|       |    |       |------+-LSFT-+-LCTL-+-LALT-+-LGUI-+------|
+ * |------+-LGUI-+-LALT-+-LCTL-+-LSFT-+------|       |    |       |------+-RSFT-+-RCTL-+-LALT-+-RGUI-+------|
  * | LCTL |   Z  |   X  |   C  |   V  |   B  |-------|    |-------|   N  |   M  |   ,  |   .  |   /  |   Ö  |
  * '---------------RALT----------------------/       /    \       \----------------------RALT---------------'
  *                   |      | ESC  | SPC  | /  TAB  /      \  ENT  \  | BSPC | DEL  |      |
@@ -140,7 +140,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |      |   Q  |   W  |   F  |   P  |   B  |                    |   J  |   L  |   U  |   Y  |   '  |   Å  |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
  * | LSFT |   A  |   R  |   S  |   T  |   G  |-------.    .-------|   M  |   N  |   E  |   I  |   O  |   Ä  |
- * |------+-LGUI-+-LALT-+-LCTL-+-LSFT-+------|       |    |       |------+-LSFT-+-LCTL-+-LALT-+-LGUI-+------|
+ * |------+-LGUI-+-LALT-+-LCTL-+-LSFT-+------|       |    |       |------+-RSFT-+-RCTL-+-LALT-+-RGUI-+------|
  * | LCTL |   Z  |   X  |   C  |   D  |   V  |-------|    |-------|   K  |   H  |   ,  |   .  |   /  |   Ö  |
  * '---------------RALT----------------------/       /    \       \----------------------RALT---------------'
  *                   |      | ESC  | SPC  | /  TAB  /      \  ENT  \  | BSPC | DEL  |      |
@@ -257,7 +257,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |      |   ;  |   4  |   5  |   6  |  =   |-------.    .-------|      |   /  |   *  |   -  |   +  |      |
  * |------+------+------+------+------+------|       |    |       |------+-LSFT-+-LCTL-+-LALT-+-LGUI-+------|
  * |      |   `  |   1  |   2  |   3  |  \   |-------|    |-------|      |      |   ,  |   .  |      |      |
- * '-----------------------------------------/       /    \       \----------------------RALT---------------'
+ * '-----------------------------------------/       /    \       \----------------------ALGR---------------'
  *                   |      |   .  |  0   | /   -   /      \       \  |      |      |      |
  *                   |      |      |      |/       /        \       \ |      |      |      |
  *                   '-------------------''-------'          '-------''--------------------'
