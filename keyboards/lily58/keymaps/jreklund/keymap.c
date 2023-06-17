@@ -295,7 +295,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   return true;
 };
 
-void td_php(qk_tap_dance_state_t *state, void *user_data) {
+void td_php(tap_dance_state_t *state, void *user_data) {
   switch (state->count) {
     case 1:
       SEND_STRING("<?php");
@@ -308,7 +308,7 @@ void td_php(qk_tap_dance_state_t *state, void *user_data) {
   }
 }
 
-qk_tap_dance_action_t tap_dance_actions[] = {
+tap_dance_action_t tap_dance_actions[] = {
   [KC_RABK_LABK] = ACTION_TAP_DANCE_DOUBLE(KC_RABK, KC_LABK),
   [KC_LBRC_RBRC] = ACTION_TAP_DANCE_DOUBLE(KC_LBRC, KC_RBRC),
   [KC_LPRN_RPRN] = ACTION_TAP_DANCE_DOUBLE(KC_LPRN, KC_RPRN),
