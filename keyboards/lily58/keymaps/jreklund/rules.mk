@@ -9,5 +9,6 @@ MOUSEKEY_ENABLE = yes # Mouse keys
 EXTRAKEY_ENABLE = yes # Audio control and System control
 TAP_DANCE_ENABLE = yes # Enable Tap Dance
 CAPS_WORD_ENABLE = yes # Enable Caps Word
+NKRO_ENABLE = yes # Enable NKRO
 
 LTO_ENABLE = yes # Enables Link Time Optimization (LTO)
